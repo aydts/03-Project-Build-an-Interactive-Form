@@ -99,8 +99,9 @@ $('#name, #mail, #cc-num, #zip, #cvv, #other-field').keyup(function (){
 		$(this).addClass('success');
 	}
 });
-
-
+//////////Currently Some inputs dispaly "success" class//////////////////////////
+//////////However, imput field will display error ////////////////////
+////////////////only after form is submitted////////////////////
 $('form').prepend('<p id="error-message"></p>');
 $('#error-message').hide();
 $('form').submit(function (e){
@@ -112,23 +113,27 @@ $('form').submit(function (e){
 		errorMessage = "<h2>Error!</h2> Please ensure you have entered all required fields.";
 		$('#name').addClass('error');
 		$('#name').focus();
-	} else if ( !emailAddress.test($('#mail').val()) ) {
+	} if ( !emailAddress.test($('#mail').val()) ) {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2> Please enter a valid email.";
 		$('#mail').focus();
-	} else if ( $(".activities > label > input:checked").length === 0 ) {
+	} if ( $(".activities > label > input:checked").length === 0 ) {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2> Please select at least one activity.";
 		$('.activities').focus();
-	} else if ( $("#payment").val() === "select_method" )  {
+	} if ( $("#payment").val() === "select_method" )  {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2>Please select a payment method.";
 		$('#payment').focus();
-	} else if ( $("#payment").val() === "credit card" && !creditCard.test($("#cc-num").val()) )  {
+	} else if ( $("#payment").val() === "credit card" && $("#cc-num").val() === "") {
+    $("html, body").animate({scrollTop: 0}, "slow");
+    errorMessage = "<h2>Error!</h2>Please enter a credit card number.";
+    $('#cc-num').focus();
+ } else if ( $("#payment").val() === "credit card" && !creditCard.test($("#cc-num").val()) )  {
 		$("html, body").animate({scrollTop: 0}, "slow");
-		errorMessage = "<h2>Error!</h2>Please enter a valid credit card number.";
+		errorMessage = "<h2>Error!</h2>Please enter a number that is between 13 and 16 digits long.";
 		$('#cc-num').focus();
-	} else if ( $("#payment").val() === "credit card" && !zipCode.test($("#zip").val()) )  {
+	} else if ( $("#payment").val() === "credit card" && !zipCode.test($("#zip").val()) && $("#zip").length.val() != 5)  {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2>Please enter your zip code.";
 		$('#zip').focus();
@@ -139,7 +144,7 @@ $('form').submit(function (e){
 	} else {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "";
-		alert("Thanks for registering! We'll see you at the Con!");
+		alert("Thanks for registering!");
 	}
 	document.getElementById('error-message').innerHTML = errorMessage;
 	$('#error-message').show();
