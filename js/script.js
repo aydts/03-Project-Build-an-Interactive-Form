@@ -113,15 +113,15 @@ $('form').submit(function (e){
 		errorMessage = "<h2>Error!</h2> Please ensure you have entered all required fields.";
 		$('#name').addClass('error');
 		$('#name').focus();
-	} if ( !emailAddress.test($('#mail').val()) ) {
+	} else if ( !emailAddress.test($('#mail').val()) ) {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2> Please enter a valid email.";
 		$('#mail').focus();
-	} if ( $(".activities > label > input:checked").length === 0 ) {
+	} else if ( $(".activities > label > input:checked").length === 0 ) {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2> Please select at least one activity.";
 		$('.activities').focus();
-	} if ( $("#payment").val() === "select_method" )  {
+	} else if ( $("#payment").val() === "select_method" )  {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2>Please select a payment method.";
 		$('#payment').focus();
@@ -129,11 +129,11 @@ $('form').submit(function (e){
     $("html, body").animate({scrollTop: 0}, "slow");
     errorMessage = "<h2>Error!</h2>Please enter a credit card number.";
     $('#cc-num').focus();
- } else if ( $("#payment").val() === "credit card" && !creditCard.test($("#cc-num").val()) )  {
+ }  else if ( $("#payment").val() === "credit card" && !creditCard.test($("#cc-num").val()) )  {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2>Please enter a number that is between 13 and 16 digits long.";
 		$('#cc-num').focus();
-	} else if ( $("#payment").val() === "credit card" && !zipCode.test($("#zip").val()) && $("#zip").length.val() != 5)  {
+	} else if ( $("#payment").val() === "credit card" && !zipCode.test($("#zip").val()) ) {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2>Please enter your zip code.";
 		$('#zip').focus();
