@@ -2,8 +2,10 @@
 var emailAddress = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 var creditCard =  /^\d{13,16}D*$/;
 var zipCode = /^\d{5}(?:[-\s]\d{4})?$/;
+var cvv = /^\d{3}$/;
 var errorMessage ="";
-
+var otherTitle = document.getElementById("other-title");
+otherTitle.className += "is-hidden";
 
 
 //If "other" option is selected  text field is displayed
@@ -137,7 +139,7 @@ $('form').submit(function (e){
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2>Please enter your zip code.";
 		$('#zip').focus();
-	} else if ( $("#payment").val() === "credit card" && $("#cvv").val().length < 3)  {
+	} else if ( $("#payment").val() === "credit card" && !cvv.test($("#cvv").val()) )  {
 		$("html, body").animate({scrollTop: 0}, "slow");
 		errorMessage = "<h2>Error!</h2>Please enter a 3 digit CVV";
 		$('#cvv').focus();
